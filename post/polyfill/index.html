@@ -1,0 +1,339 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Polyfill | 🦌</title>
+<link rel="shortcut icon" href="https://croatiaparanoia.github.io/blog//favicon.ico?v=1609758521309">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://croatiaparanoia.github.io/blog//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Polyfill | 🦌 - Atom Feed" href="https://croatiaparanoia.github.io/blog//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="听闻你这包不愿给我加polyfill？
+
+曾经有写了个工具库发到了npm， 最近有位老哥说这个库低版本浏览器不兼容， 如 数组的 includes 方法之类的。我随即看了下，确实吼， tsc 只是把语法糖的转译了， 至于高级API特性的，还..." />
+    <meta name="keywords" content="Babel,Polyfill" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://croatiaparanoia.github.io/blog/">
+  <img class="avatar" src="https://croatiaparanoia.github.io/blog//images/avatar.png?v=1609758521309" alt="">
+  </a>
+  <h1 class="site-title">
+    🦌
+  </h1>
+  <p class="site-description">
+    万物皆有裂痕，那是光照进来的地方。
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/blog/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/blog/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/blog/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/blog/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/CroatiaParanoia" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Polyfill
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-11-11
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://croatiaparanoia.github.io/blog/tag/VRD_CJ-v7/" class="post-tag">
+                  # Babel
+                </a>
+              
+                <a href="https://croatiaparanoia.github.io/blog/tag/zGLDGp_EhB/" class="post-tag">
+                  # Polyfill
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://croatiaparanoia.github.io/blog//post-images/polyfill.jpeg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="听闻你这包不愿给我加polyfill">听闻你这包不愿给我加polyfill？</h1>
+<figure data-type="image" tabindex="1"><img src="https://croatiaparanoia.github.io/blog//post-images/1609758259689.jpg" alt="" loading="lazy"></figure>
+<p>曾经有写了个工具库发到了npm， 最近有位老哥说这个库低版本浏览器不兼容， 如 数组的 includes 方法之类的。我随即看了下，确实吼， tsc 只是把语法糖的转译了， 至于高级API特性的，还是那个样子。</p>
+<p>随即准备给库加polyfill， 但是想了下。 嘿， 这第三方库的， 我要是加了polyfill， 那要是有其他人不考虑浏览器兼容性问题的呢， 那岂不是polyfill得代码都用不到， 徒增体积？</p>
+<figure data-type="image" tabindex="2"><img src="https://croatiaparanoia.github.io/blog//post-images/1609758267270.jpg" alt="" loading="lazy"></figure>
+<p>那好勒， 既然这第三方库不打算整合polyfill， 那就是让使用方去用babel转译这个第三方库了。但是第三方行不行呢， 我心里还真发怵，也不敢直接跟人家说，本着毛主席的“没有调查就没有发言权”原则， 我决定自己去 try 一 try。</p>
+<h2 id="随便搞个项目">随便搞个项目</h2>
+<p>首先， 那就是项目基础了。</p>
+<pre><code class="language-shell">mkdir support-ie
+
+cd support-ie
+
+npm init -y
+
+yarn add webpack webpack-cli --dev
+
+# 装上我那个可怜的包
+yarn add ffformat
+
+# 装上 babel 相关依赖
+yarn add @babel/core @babel/preset-env @babel/plugin-transform-run-time babel-loader --dev
+
+# 装上 core-js。 按需引入 polyfill 之类的就取这里面的了
+yarn add core-js
+
+# 创建 webpack 配置文件
+touch webpack.config.js
+
+# 创建 babel 配置文件 
+touch babel.config.json
+
+# 源代码文件
+mkdir src &amp;&amp; cd src &amp;&amp; touch main.js
+</code></pre>
+<p>文件创建的差不多，然后就是配制 config 文件了</p>
+<pre><code class="language-javascript">// webpack.config.js
+const path = require(&quot;path&quot;);
+
+module.exports = {
+  entry: {
+    main: &quot;./src/main.js&quot;,
+  },
+  output: &quot;/dist/main.js&quot;,
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: &quot;babel-loader&quot;,
+        include: [
+          path.resolve(__dirname, &quot;./src&quot;),
+          // 这里要把第三方包加入到include中， 不然loader不会去转译
+          path.resolve(__dirname, &quot;node_modules/ffformat&quot;),
+        ],
+      },
+    ],
+  },
+  optimization: {
+    minimize: false,
+  },
+};
+</code></pre>
+<p>接着是babel 的配置文件</p>
+<pre><code class="language-json">// babel.config.json
+{
+  &quot;presets&quot;: [
+    [
+      &quot;@babel/env&quot;,
+      {
+        // 指明 corejs 的版本，（不同版本的文件和命名方式有区别，避免找文件报错， 所以要指明版本）
+        &quot;corejs&quot;: 3,
+        // 兼容ie9
+        &quot;targets&quot;: {
+          &quot;ie&quot;: 9,
+        },
+        // 使用这个按需引入polyfill
+        &quot;useBuiltIns&quot;: &quot;usage&quot;
+      }
+    ]
+  ]
+}
+</code></pre>
+<p>紧接着，我们开始在 <code>src/main.js</code> 写上一段代码</p>
+<pre><code class="language-javascript">// src/main.js
+import * as ffformat from 'ffforamt';
+
+console.log(ffformat);
+</code></pre>
+<p>然后根目录运行webpack一次 **<code>npx webpack</code> **</p>
+<p>就可以看到 打包 <code>main.js</code> 的时候， 引入了一些 <code>core-js</code> 下面的模块， 去看 dist/main.js ， 就能看到针对一些高级特性， 有做了 polyfill。</p>
+<p>致此， 正常流程完。</p>
+<figure data-type="image" tabindex="3"><img src="https://croatiaparanoia.github.io/blog//post-images/1609758276421.jpg" alt="" loading="lazy"></figure>
+<h2 id="遇到的问题">遇到的问题</h2>
+<h3 id="1-babel-配置文件的问题">1. Babel 配置文件的问题</h3>
+<p>刚开始的时候， 用的是 <code>.babelrc</code> 来配置babel， 结果loader 一直不走 <code>node_modules</code> ， 不转译 <code>node_modules</code> 中的代码，卡了半天，不断找文章，后来发现了一位老哥的话。</p>
+<figure data-type="image" tabindex="4"><img src="https://croatiaparanoia.github.io/blog//post-images/1609758282188.png" alt="" loading="lazy"></figure>
+<p>随即将 <code>.babelrc</code>  重命名为 <code>babel.config.json</code>， 再 <code>npx webpack</code> ， 成功给 <code>node_modules</code> 中的 <code>ffformat</code> 整入 <code>polyfill</code> 部分的代码。看到这个结果差点把我送走。 这卡了半天的问题， 改了个名字就好了。。。</p>
+<figure data-type="image" tabindex="5"><img src="https://croatiaparanoia.github.io/blog//post-images/1609758287255.jpeg" alt="" loading="lazy"></figure>
+<h3 id="2-多种polyfill方式">2. 多种polyfill方式</h3>
+<ol>
+<li>
+<p>按需引入方式， 用到哪个高级特性， 就自动加入这个特性的polyfill。 （即 本文写的方式）</p>
+</li>
+<li>
+<p>全量引入方式。在入口文件顶部加入这两行。</p>
+<pre><code class="language-javascript">import &quot;core-js/stable&quot;;
+import &quot;regenerator-runtime/runtime&quot;;
+</code></pre>
+</li>
+<li>
+<p>动态引入方式。这个是在 <a href="https://polyfill.io">polyfill.io</a> 去配置一个外链。配置需要兼容的es版本 或者 需要的对应api。然后 用 script 标签引入该外链， 就会返回对应的一些<code>polyfill</code>代码。（因 script 的src 属于get请求， 所以服务器那边可以知道我们浏览器的 userAgent， 然后根据这个去判断我们浏览器， 给浏览器响应对应的polyfill。 所以用高版本浏览器去访问此请求， 可能返回的内容是空的）</p>
+</li>
+</ol>
+<p>三种方式， 感觉第一种和第三种偏好一点。</p>
+<p>第一种的按需引入， 不会因为就一个 高级特性的api， 就导致整个bundle文件瞬间增大N多倍。</p>
+<p>第三种则是 指定es版本， 由服务器决定需要返回哪些polyfill。这样相当于是将所有的polyfill 都抽离出去，用别人家的cdn引入进来。</p>
+<p>至于选择上， 如果说 请求 <a href="https://polyfill.io">polyfill.io</a> 的速度过慢， 或者项目内网部署，那么选择第一种方式是更好的。</p>
+<p>而如果项目可以访问外网资源。并且访问 <a href="https://polyfill.io">polyfill.io</a> 外链速度足够快， 那么用第三种也是极好的。</p>
+<p>当然，  如果项目没有涉及到 <code>webpack</code>， <code>rollup</code>之类的构建工具， 只是纯的项目，那么只能选择第三种了。</p>
+<p>如果没用 构架工具， 还要内网部署， 那就把外链的 polyfill 下载下来，放到本地再一并部署上去。</p>
+<figure data-type="image" tabindex="6"><img src="https://croatiaparanoia.github.io/blog//post-images/1609758295721.jpg" alt="" loading="lazy"></figure>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%90%AC%E9%97%BB%E4%BD%A0%E8%BF%99%E5%8C%85%E4%B8%8D%E6%84%BF%E7%BB%99%E6%88%91%E5%8A%A0polyfill">听闻你这包不愿给我加polyfill？</a>
+<ul>
+<li><a href="#%E9%9A%8F%E4%BE%BF%E6%90%9E%E4%B8%AA%E9%A1%B9%E7%9B%AE">随便搞个项目</a></li>
+<li><a href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">遇到的问题</a>
+<ul>
+<li><a href="#1-babel-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E9%97%AE%E9%A2%98">1. Babel 配置文件的问题</a></li>
+<li><a href="#2-%E5%A4%9A%E7%A7%8Dpolyfill%E6%96%B9%E5%BC%8F">2. 多种polyfill方式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://croatiaparanoia.github.io/blog/post/event-loop/">
+              <h3 class="post-title">
+                Event Loop
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '344de4a7a0e3121bcdbc',
+    clientSecret: 'cf3ede59043d5bf3f50b37b93791396bb4d1267e',
+    repo: 'blog',
+    owner: 'CroatiaParanoia',
+    admin: ['CroatiaParanoia'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://croatiaparanoia.github.io/blog//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
