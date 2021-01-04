@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://croatiaparanoia.github.io</id>
+    <id>https://croatiaparanoia.github.io/blog/</id>
     <title>C</title>
-    <updated>2021-01-04T10:44:22.549Z</updated>
+    <updated>2021-01-04T10:47:04.122Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://croatiaparanoia.github.io"/>
-    <link rel="self" href="https://croatiaparanoia.github.io/atom.xml"/>
+    <link rel="alternate" href="https://croatiaparanoia.github.io/blog/"/>
+    <link rel="self" href="https://croatiaparanoia.github.io/blog/atom.xml"/>
     <subtitle>万物皆有裂痕，那是光照进来的地方。</subtitle>
-    <logo>https://croatiaparanoia.github.io/images/avatar.png</logo>
-    <icon>https://croatiaparanoia.github.io/favicon.ico</icon>
+    <logo>https://croatiaparanoia.github.io/blog/images/avatar.png</logo>
+    <icon>https://croatiaparanoia.github.io/blog/favicon.ico</icon>
     <rights>All rights reserved 2021, C</rights>
     <entry>
         <title type="html"><![CDATA[Event Loop]]></title>
-        <id>https://croatiaparanoia.github.io/post/event-loop/</id>
-        <link href="https://croatiaparanoia.github.io/post/event-loop/">
+        <id>https://croatiaparanoia.github.io/blog/post/event-loop/</id>
+        <link href="https://croatiaparanoia.github.io/blog/post/event-loop/">
         </link>
         <updated>2020-10-02T10:20:39.000Z</updated>
         <content type="html"><![CDATA[<h2 id="任务分发器">任务分发器</h2>
@@ -47,7 +47,7 @@
 <li>渲染绘制阶段，从2到4， 主要就是 绘制前的逻辑执行， 以及视图相关的绘制了。</li>
 </ol>
 <p>注：微任务的执行，取决于调用栈。调用栈为空才会执行微任务。</p>
-<figure data-type="image" tabindex="1"><img src="https://croatiaparanoia.github.io/post-images/1609755671039.png" alt="轨迹图" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755671039.png" alt="轨迹图" loading="lazy"></figure>
 <h2 id="个人理解的事件循环的一个流程">个人理解的事件循环的一个流程</h2>
 <ol>
 <li>事件循环不断的判断 任务队列是否有值， 并且调用栈为空。（同时会在每隔16毫秒左右去进行一次视图绘制）</li>
@@ -344,23 +344,23 @@ btn.click();
     </entry>
     <entry>
         <title type="html"><![CDATA[渲染与校验]]></title>
-        <id>https://croatiaparanoia.github.io/post/xuan-ran-yu-xiao-yan/</id>
-        <link href="https://croatiaparanoia.github.io/post/xuan-ran-yu-xiao-yan/">
+        <id>https://croatiaparanoia.github.io/blog/post/xuan-ran-yu-xiao-yan/</id>
+        <link href="https://croatiaparanoia.github.io/blog/post/xuan-ran-yu-xiao-yan/">
         </link>
         <updated>2019-04-28T10:01:07.000Z</updated>
         <content type="html"><![CDATA[<p>当时写这个页面， 对我收获最大的应该是一个FormItem组件的Props设计，以及提交时的每一个FormItem的值校验逻辑。</p>
 <p>​UI:</p>
-<figure data-type="image" tabindex="1"><img src="https://croatiaparanoia.github.io/post-images/1609755396474.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755396474.png" alt="" loading="lazy"></figure>
 <p>输入&amp;选择的Form列表的数据源</p>
-<figure data-type="image" tabindex="2"><img src="https://croatiaparanoia.github.io/post-images/1609755402190.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755402190.png" alt="" loading="lazy"></figure>
 <p>使用数据源：</p>
-<figure data-type="image" tabindex="3"><img src="https://croatiaparanoia.github.io/post-images/1609755409906.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755409906.png" alt="" loading="lazy"></figure>
 <p>存储用户录入数据的容器：</p>
-<figure data-type="image" tabindex="4"><img src="https://croatiaparanoia.github.io/post-images/1609755415123.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755415123.png" alt="" loading="lazy"></figure>
 <p>校验函数：</p>
-<figure data-type="image" tabindex="5"><img src="https://croatiaparanoia.github.io/post-images/1609755425140.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755425140.png" alt="" loading="lazy"></figure>
 <p>使用校验函数：</p>
-<figure data-type="image" tabindex="6"><img src="https://croatiaparanoia.github.io/post-images/1609755431372.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://croatiaparanoia.github.io/blog//post-images/1609755431372.png" alt="" loading="lazy"></figure>
 <p>此方式，</p>
 <p>一个重点是数据驱动视图， FormItem 的样子， 由props的数据控制。</p>
 <p>第二个则是 rules这个校验规则。</p>
