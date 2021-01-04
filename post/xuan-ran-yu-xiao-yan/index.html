@@ -2,24 +2,26 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | C</title>
+<title>渲染与校验 | C</title>
 <link rel="shortcut icon" href="https://croatiaparanoia.github.io/favicon.ico?v=1609757045211">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://croatiaparanoia.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | C - Atom Feed" href="https://croatiaparanoia.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="渲染与校验 | C - Atom Feed" href="https://croatiaparanoia.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="
-欢迎来到我的小站呀，很高兴遇见你！🤝
+    <meta name="description" content="当时写这个页面， 对我收获最大的应该是一个FormItem组件的Props设计，以及提交时的每一个FormItem的值校验逻辑。
+​UI:
 
-🏠 关于本站
-👨‍💻 博主是谁
-⛹ 兴趣爱好
-📬 联系我呀
-..." />
-    <meta name="keywords" content="" />
+输入&amp;选择的Form列表的数据源
+
+使用数据源：
+
+存储用户录入数据的容器：
+
+校验函数：..." />
+    <meta name="keywords" content="React" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -85,41 +87,50 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              渲染与校验
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2019-04-28
               </span>
               <span>
                 1 min read
               </span>
               
+                <a href="https://croatiaparanoia.github.io/tag/vc3DCvf3O/" class="post-tag">
+                  # React
+                </a>
+              
             </div>
+            
+              <img class="post-feature-image" src="https://croatiaparanoia.github.io/post-images/xuan-ran-yu-xiao-yan.jpeg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+                <p>当时写这个页面， 对我收获最大的应该是一个FormItem组件的Props设计，以及提交时的每一个FormItem的值校验逻辑。</p>
+<p>​UI:</p>
+<figure data-type="image" tabindex="1"><img src="https://croatiaparanoia.github.io/post-images/1609755396474.png" alt="" loading="lazy"></figure>
+<p>输入&amp;选择的Form列表的数据源</p>
+<figure data-type="image" tabindex="2"><img src="https://croatiaparanoia.github.io/post-images/1609755402190.png" alt="" loading="lazy"></figure>
+<p>使用数据源：</p>
+<figure data-type="image" tabindex="3"><img src="https://croatiaparanoia.github.io/post-images/1609755409906.png" alt="" loading="lazy"></figure>
+<p>存储用户录入数据的容器：</p>
+<figure data-type="image" tabindex="4"><img src="https://croatiaparanoia.github.io/post-images/1609755415123.png" alt="" loading="lazy"></figure>
+<p>校验函数：</p>
+<figure data-type="image" tabindex="5"><img src="https://croatiaparanoia.github.io/post-images/1609755425140.png" alt="" loading="lazy"></figure>
+<p>使用校验函数：</p>
+<figure data-type="image" tabindex="6"><img src="https://croatiaparanoia.github.io/post-images/1609755431372.png" alt="" loading="lazy"></figure>
+<p>此方式，</p>
+<p>一个重点是数据驱动视图， FormItem 的样子， 由props的数据控制。</p>
+<p>第二个则是 rules这个校验规则。</p>
+<p>如果在以前要判断这些数据是否合法， 需要一个个的写if来判断， 判断得多的话， 基本都是一整页都是if代码</p>
+<p>而如果使用rules + 校验函数， 则值需要几行代码， 循环计算然后，抛出有误的提示语句，并大大简洁了代码。</p>
+<p>此方式借鉴了 Ant Design 的 <a href="%5Bhttps://ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99%5D(https://ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99)">规则校验 | 表单 Form  - Ant Design</a></p>
+<p>以及看到别人推荐的一个校验器 <a href="https://github.com/fjc0k/vtils#easyvalidator">fjc0k/vtils: 小巧实用的 JavaScript 工具类库</a></p>
 
               </div>
               <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E7%AB%99">🏠 关于本站</a></li>
-<li><a href="#%E5%8D%9A%E4%B8%BB%E6%98%AF%E8%B0%81">👨‍💻 博主是谁</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">⛹ 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91%E5%91%80">📬 联系我呀</a></li>
-</ul>
-</li>
-</ul>
-
+                
               </div>
             </div>
           </article>

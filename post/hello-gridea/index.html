@@ -2,11 +2,11 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | Gridea</title>
-<link rel="shortcut icon" href="https://croatiaparanoia.github.io/favicon.ico?v=1609753633325">
+<title>Hello Gridea | C</title>
+<link rel="shortcut icon" href="https://croatiaparanoia.github.io/favicon.ico?v=1609757045211">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://croatiaparanoia.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Hello Gridea | Gridea - Atom Feed" href="https://croatiaparanoia.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Hello Gridea | C - Atom Feed" href="https://croatiaparanoia.github.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
@@ -28,13 +28,13 @@ Gridea 主页
       <div class="main-content">
         <div class="site-header">
   <a href="https://croatiaparanoia.github.io">
-  <img class="avatar" src="https://croatiaparanoia.github.io/images/avatar.png?v=1609753633325" alt="">
+  <img class="avatar" src="https://croatiaparanoia.github.io/images/avatar.png?v=1609757045211" alt="">
   </a>
   <h1 class="site-title">
-    Gridea
+    C
   </h1>
   <p class="site-description">
-    温故而知新
+    万物皆有裂痕，那是光照进来的地方。
   </p>
   <div class="menu-container">
     
@@ -65,6 +65,10 @@ Gridea 主页
   </div>
   <div class="social-container">
     
+      
+        <a href="https://github.com/CroatiaParanoia" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
       
     
       
@@ -140,6 +144,32 @@ Gridea 主页
 
         
 
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '344de4a7a0e3121bcdbc',
+    clientSecret: 'cf3ede59043d5bf3f50b37b93791396bb4d1267e',
+    repo: 'blog',
+    owner: 'CroatiaParanoia',
+    admin: ['CroatiaParanoia'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
         
 
         <div class="site-footer">
