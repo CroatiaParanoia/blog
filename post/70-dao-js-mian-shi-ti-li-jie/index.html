@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>70道js面试题理解 | 🦌</title>
-<link rel="shortcut icon" href="https://croatiaparanoia.github.io/blog//favicon.ico?v=1614263669501">
+<link rel="shortcut icon" href="https://croatiaparanoia.github.io/blog//favicon.ico?v=1614263822285">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://croatiaparanoia.github.io/blog//styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="70道js面试题理解 | 🦌 - Atom Feed" href="https://croatiaparanoia.github.io/blog//atom.xml">
@@ -11,11 +11,12 @@
 
 
 
-    <meta name="description" content="此文章是根据 70 道 Javascript 面试题【译】 的题目， 自己的理解所写出来的。
+    <meta name="description" content="面试题理解
+此文章是根据 70 道 Javascript 面试题【译】 的题目， 自己的理解所写出来的。
 欢迎大家在下面留下不同想法。
 1.undefined 和 null 有什么区别？
 
-undefined 是未指定特定值的变量的默认值，或者没有显式..." />
+undefined 是未指定特定值的变量的默认值，..." />
     <meta name="keywords" content="面试题,Javascript" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -25,7 +26,7 @@ undefined 是未指定特定值的变量的默认值，或者没有显式..." />
       <div class="main-content">
         <div class="site-header">
   <a href="https://croatiaparanoia.github.io/blog/">
-  <img class="avatar" src="https://croatiaparanoia.github.io/blog//images/avatar.png?v=1614263669501" alt="">
+  <img class="avatar" src="https://croatiaparanoia.github.io/blog//images/avatar.png?v=1614263822285" alt="">
   </a>
   <h1 class="site-title">
     🦌
@@ -89,7 +90,7 @@ undefined 是未指定特定值的变量的默认值，或者没有显式..." />
                 2021-01-05
               </span>
               <span>
-                16 min read
+                22 min read
               </span>
               
                 <a href="https://croatiaparanoia.github.io/blog/tag/JcSpldVDn/" class="post-tag">
@@ -106,7 +107,8 @@ undefined 是未指定特定值的变量的默认值，或者没有显式..." />
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>此文章是根据 <a href="https://juejin.cn/post/6913534577684414472">70 道 Javascript 面试题【译】</a> 的题目， 自己的理解所写出来的。</p>
+                <h1 id="面试题理解">面试题理解</h1>
+<p>此文章是根据 <a href="https://juejin.cn/post/6913534577684414472">70 道 Javascript 面试题【译】</a> 的题目， 自己的理解所写出来的。</p>
 <p>欢迎大家在下面留下不同想法。</p>
 <h2 id="1undefined-和-null-有什么区别">1.undefined 和 null 有什么区别？</h2>
 <blockquote>
@@ -402,11 +404,146 @@ const v = fn(); // 还有这个呢
 </ol>
 <p>注意： 当为严格模式下， 非严格模式下 <code>this</code> 指向全局的情况， 将会变成 <code>this</code> 指向 <code>undefined</code></p>
 <h3 id="25-对象的-prototype原型-是什么">25. 对象的 prototype(原型) 是什么？</h3>
+<p>实例取得公有属性或者方法的地方， 是实现继承的核心之一（另外一个就是通过实例的 <strong>__proto__</strong> 之间的关联）</p>
+<h3 id="26-什么是-iife它的用途是什么">26. 什么是 IIFE，它的用途是什么？</h3>
+<p>自调用函数</p>
+<p>分割作用域， 缓存数据，避免全局变量污染。</p>
+<h3 id="27-functionprototypeapply-方法的用途是什么">27. Function.prototype.apply 方法的用途是什么？</h3>
+<p>调用时，更改调用函数内部this指向， 并接受一个参数数组。第一个参数为内部 <code>this</code> 的指向， 第二个参数是一个数组， 作为函数执行时候的参数)</p>
+<h3 id="28-functionprototypecall-方法的用途是什么">28. <code>Function.prototype.call</code> 方法的用途是什么？</h3>
+<p>调用时，更改调用函数内部this指向， 并接受一个参数列表。（第一个参数为内部 <code>this</code> 的指向， 第二第三... 的参数都作为函数执行时候的参数）</p>
+<h3 id="29-functionprototypeapply-和-functionprototypecall-之间有什么区别">29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？</h3>
+<p>apply 接受的是一个参数数组， call 接受的是一个参数列表。</p>
+<p>也就是 apply 的形参个数为2， call 形参个数 可以为更多。</p>
+<h3 id="30-functionprototypebind-的用途是什么">30. Function.prototype.bind 的用途是什么？</h3>
+<p>更改<code>this</code> 指向， 但不调用， 返回一个新的函数。</p>
+<p>第一个参数为 <code>this</code> 的指向， 第2，3... 的则是作为原函数的参数。</p>
+<h3 id="31-什么是函数式编程-javascript-的哪些特性使其成为函数式语言的候选语言">31. 什么是函数式编程? JavaScript 的哪些特性使其成为函数式语言的候选语言</h3>
+<p><a href="https://juejin.cn/post/6913534577684414472#heading-30">原文</a></p>
+<h3 id="32-什么是高阶函数">32. 什么是高阶函数？</h3>
+<blockquote>
+<p><strong>高阶函数只是将函数作为参数或返回值的函数。</strong></p>
+</blockquote>
+<pre><code class="language-javascript">function higherOrderFunction(param,callback){   return callback(param); }
+</code></pre>
+<h3 id="33-为什么函数被称为一等公民">33. 为什么函数被称为一等公民？</h3>
+<blockquote>
+<p>在JavaScript中，函数不仅拥有一切传统函数的使用方式（声明和调用），而且可以做到像简单值一样赋值<code>（var func = function(){}）</code>、传参<code>(function func(x,callback){callback();})</code>、返回<code>(function(){return function(){}})</code>，这样的函数也称之为<strong>第一级函数（First-class Function）</strong>。不仅如此，JavaScript中的函数还充当了类的构造函数的作用，同时又是一个<code>Function</code>类的实例(instance)。这样的多重身份让JavaScript的函数变得非常重要。</p>
+</blockquote>
+<h3 id="34-手动实现-arrayprototypemap-方法">34. 手动实现 <code>Array.prototype.map</code> 方法</h3>
+<pre><code class="language-javascript">function map(arr, cb){
+  if(arr instanceof Array &amp;&amp; typeof cb === 'function'){
+    var resArr = [];
+    for(var i = 0; i &lt; arr.length; i++){
+			resArr.push(cb(arr[i], i, arr));
+    }
+    return resArr;
+  }
+  return [];
+}
+</code></pre>
+<h3 id="35-手动实现arrayprototypefilter方法">35. 手动实现<code>Array.prototype.filter</code>方法</h3>
+<pre><code class="language-javascript">function filter(arr, cb){
+  if(arr instanceof Array &amp;&amp; typeof cb === 'function'){
+    var resArr = [];
+    for(var i = 0; i &lt; arr.length; i++){
+      const res = cb(arr[i], i, arr);
+			res &amp;&amp; resArr.push(res);
+    }
+    return resArr;
+  }
+  return [];
+}
+</code></pre>
+<h3 id="36-手动实现arrayprototypereduce方法">36. 手动实现<code>Array.prototype.reduce</code>方法</h3>
+<pre><code class="language-javascript">function filter(arr, cb, initialValue){
+  if(arr instanceof Array &amp;&amp; typeof cb === 'function'){
+    var innerArr = arr.concat([]);
+    var resArr = [];
+    let value = initialValue === undefined ? innerArr.shift() : initialValue;
+    for(var i = 0; i &lt; innerArr.length; i++){
+      value = cb(value, innerArr[i], i, arr);
+    }
+    return value;
+  }
+  return [];
+}
+</code></pre>
+<h3 id="37-arguments-的对象是什么">37. arguments 的对象是什么？</h3>
+<p>普通函数的形参集合， 是一个类数组。</p>
+<p>注： 箭头函数没有 <code>arguments</code></p>
+<h3 id="38-如何创建一个没有-prototype原型的对象">38. 如何创建一个没有 prototype(原型)的对象？</h3>
+<pre><code class="language-javascript">Object.create(null);
+</code></pre>
+<h3 id="39-为什么在调用这个函数时代码中的b会变成一个全局变量">39. 为什么在调用这个函数时，代码中的<code>b</code>会变成一个全局变量?</h3>
+<pre><code class="language-javascript">function myFunc() {  
+  let a = b = 0;  
+}  
+ 
+myFunc();
+</code></pre>
+<p><a href="https://juejin.cn/post/6913534577684414472#heading-38">原文</a></p>
+<h3 id="40-ecmascript-是什么">40. ECMAScript 是什么？</h3>
+<p>语言标准， 浏览器厂商和nodejs 开发者需要按照此标准来设计和开发。目的是为了统一和规范。</p>
+<h3 id="41-es6或ecmascript-2015有哪些新特性">41. ES6或ECMAScript 2015有哪些新特性？</h3>
+<blockquote>
+<ul>
+<li>箭头函数</li>
+<li>类</li>
+<li>模板字符串</li>
+<li>加强的对象字面量</li>
+<li>对象解构</li>
+<li>Promise</li>
+<li>生成器</li>
+<li>模块</li>
+<li>Symbol</li>
+<li>代理</li>
+<li>Set</li>
+<li>函数默认参数</li>
+<li>rest 和展开</li>
+<li>块作用域</li>
+</ul>
+</blockquote>
+<h3 id="42-varlet和const的区别是什么">42. <code>var</code>,<code>let</code>和<code>const</code>的区别是什么？</h3>
+<p>var 在预解释时会进行变量提升， let， const 不会。</p>
+<p>var 在全局声明的时候， 会将变量挂载到window上， 而 let 和 const 则是在全局作用域下再开一个作用域， 并位于其中。</p>
+<p>var 可以进行重复声明， let，const 不行</p>
+<p>let，const 声明的时候会产生块级作用域， var不会。</p>
+<h3 id="43-什么是箭头函数">43. 什么是箭头函数？</h3>
+<p>语法比普通函数更加简洁， 但是它没有 this， arguments, super，以及不能作为构造函数。</p>
+<p>适合用在需要匿名函数的地方。</p>
+<h3 id="44-什么是类">44. 什么是类？</h3>
+<p>是js 中编写构造函数的新方法。是一个语法糖， 更直观简便的去书写构造函数。最终编译的结果也是构造函数， 继承也是通过构造函数的 <code>prototype</code> 和实例 的 <code>__proto__</code></p>
+<h3 id="45-什么是模板字符串">45. 什么是模板字符串？</h3>
+<p>两个反单引号包起来的则为末班字符串， 支持回车换行，以及 <code>${}</code> 形式的表达式，使用比以前的 单引号 和 双引号字符串简洁。</p>
+<h3 id="46-什么是对象解构">46. 什么是对象解构？</h3>
+<blockquote>
+<p><strong>对象解构</strong>是从对象或数组中获取或提取值的一种新的、更简洁的方法。</p>
+</blockquote>
+<h3 id="47-什么是-es6-模块">47. 什么是 ES6 模块？</h3>
+<blockquote>
+<p><strong>模块</strong>使我们能够将代码基础分割成多个文件，以获得更高的可维护性，并且避免将所有代码放在一个大文件中。</p>
+</blockquote>
+<p>而es6 模块则是 在es6 版本中提出的 模块概念， 使用 <code>import</code> 来对其他模块功能和值的导入， 使用 <code>export</code> 来对该模块的功能和值的导出。</p>
+<p>对应的有 <code>nodejs</code>  端的 <code>commonjs</code> ， 使用的同步模块加载规范， 因为后端的代码都是放在后端服务器， 在执行的时候相当于只是在本地读取文件。</p>
+<p>以及 前端的 amd， 异步模块加载规范。因为前端的页面， 图片等资源都是存放在服务器端， 当一个  js 文件需要依赖另一个js文件的时候， 则需要去异步的请求该js文件，因此前端的模块规范是用的 AMD 规范。</p>
+<h3 id="48-什么是set对象它是如何工作的">48. 什么是<code>Set</code>对象，它是如何工作的？</h3>
+<p><strong>Set</strong> 类似于数组，但是成员的值都是唯一的，没有重复的值。</p>
+<p><code>add</code> 方法添加新值， 如果 新值已存在， 则不会添加。</p>
+<p><code>delete</code> 删除值， 删除成功返回true， 失败返回false（该值不存在）</p>
+<p><code>has</code> 判断是否有该值。</p>
+<p><code>clear</code> 清空set</p>
+<p><code>size</code>  该 set 的长度</p>
+<h3 id="49-什么是回调函数">49. 什么是回调函数？</h3>
+<blockquote>
+<p><strong>回调函数</strong>是一段可执行的代码段，它作为一个参数传递给其他的代码，其作用是在需要的时候方便调用这段（回调函数）代码。</p>
+</blockquote>
+<h3 id="50-promise-是什么">50. Promise 是什么？</h3>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E9%9D%A2%E8%AF%95%E9%A2%98%E7%90%86%E8%A7%A3">面试题理解</a>
 <ul>
 <li><a href="#1undefined-%E5%92%8C-null-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">1.undefined 和 null 有什么区别？</a></li>
 <li><a href="#2-%E8%BF%90%E7%AE%97%E7%AC%A6">2. &amp;&amp; 运算符</a></li>
@@ -443,6 +580,31 @@ const v = fn(); // 还有这个呢
 <li><a href="#23-use-strict-%E6%98%AF%E5%B9%B2%E5%98%9B%E7%94%A8%E7%9A%84">23. 'use strict' 是干嘛用的？</a></li>
 <li><a href="#24-javascript-%E4%B8%AD-this-%E5%80%BC%E6%98%AF%E4%BB%80%E4%B9%88">24. JavaScript 中 <code>this</code> 值是什么？</a></li>
 <li><a href="#25-%E5%AF%B9%E8%B1%A1%E7%9A%84-prototype%E5%8E%9F%E5%9E%8B-%E6%98%AF%E4%BB%80%E4%B9%88">25. 对象的 prototype(原型) 是什么？</a></li>
+<li><a href="#26-%E4%BB%80%E4%B9%88%E6%98%AF-iife%E5%AE%83%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%E4%BB%80%E4%B9%88">26. 什么是 IIFE，它的用途是什么？</a></li>
+<li><a href="#27-functionprototypeapply-%E6%96%B9%E6%B3%95%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%E4%BB%80%E4%B9%88">27. Function.prototype.apply 方法的用途是什么？</a></li>
+<li><a href="#28-functionprototypecall-%E6%96%B9%E6%B3%95%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%E4%BB%80%E4%B9%88">28. <code>Function.prototype.call</code> 方法的用途是什么？</a></li>
+<li><a href="#29-functionprototypeapply-%E5%92%8C-functionprototypecall-%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">29. Function.prototype.apply 和 Function.prototype.call 之间有什么区别？</a></li>
+<li><a href="#30-functionprototypebind-%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%E4%BB%80%E4%B9%88">30. Function.prototype.bind 的用途是什么？</a></li>
+<li><a href="#31-%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B-javascript-%E7%9A%84%E5%93%AA%E4%BA%9B%E7%89%B9%E6%80%A7%E4%BD%BF%E5%85%B6%E6%88%90%E4%B8%BA%E5%87%BD%E6%95%B0%E5%BC%8F%E8%AF%AD%E8%A8%80%E7%9A%84%E5%80%99%E9%80%89%E8%AF%AD%E8%A8%80">31. 什么是函数式编程? JavaScript 的哪些特性使其成为函数式语言的候选语言</a></li>
+<li><a href="#32-%E4%BB%80%E4%B9%88%E6%98%AF%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">32. 什么是高阶函数？</a></li>
+<li><a href="#33-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%87%BD%E6%95%B0%E8%A2%AB%E7%A7%B0%E4%B8%BA%E4%B8%80%E7%AD%89%E5%85%AC%E6%B0%91">33. 为什么函数被称为一等公民？</a></li>
+<li><a href="#34-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0-arrayprototypemap-%E6%96%B9%E6%B3%95">34. 手动实现 <code>Array.prototype.map</code> 方法</a></li>
+<li><a href="#35-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0arrayprototypefilter%E6%96%B9%E6%B3%95">35. 手动实现<code>Array.prototype.filter</code>方法</a></li>
+<li><a href="#36-%E6%89%8B%E5%8A%A8%E5%AE%9E%E7%8E%B0arrayprototypereduce%E6%96%B9%E6%B3%95">36. 手动实现<code>Array.prototype.reduce</code>方法</a></li>
+<li><a href="#37-arguments-%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E4%BB%80%E4%B9%88">37. arguments 的对象是什么？</a></li>
+<li><a href="#38-%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%B2%A1%E6%9C%89-prototype%E5%8E%9F%E5%9E%8B%E7%9A%84%E5%AF%B9%E8%B1%A1">38. 如何创建一个没有 prototype(原型)的对象？</a></li>
+<li><a href="#39-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E8%B0%83%E7%94%A8%E8%BF%99%E4%B8%AA%E5%87%BD%E6%95%B0%E6%97%B6%E4%BB%A3%E7%A0%81%E4%B8%AD%E7%9A%84b%E4%BC%9A%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F">39. 为什么在调用这个函数时，代码中的<code>b</code>会变成一个全局变量?</a></li>
+<li><a href="#40-ecmascript-%E6%98%AF%E4%BB%80%E4%B9%88">40. ECMAScript 是什么？</a></li>
+<li><a href="#41-es6%E6%88%96ecmascript-2015%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B0%E7%89%B9%E6%80%A7">41. ES6或ECMAScript 2015有哪些新特性？</a></li>
+<li><a href="#42-varlet%E5%92%8Cconst%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88">42. <code>var</code>,<code>let</code>和<code>const</code>的区别是什么？</a></li>
+<li><a href="#43-%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0">43. 什么是箭头函数？</a></li>
+<li><a href="#44-%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB">44. 什么是类？</a></li>
+<li><a href="#45-%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2">45. 什么是模板字符串？</a></li>
+<li><a href="#46-%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84">46. 什么是对象解构？</a></li>
+<li><a href="#47-%E4%BB%80%E4%B9%88%E6%98%AF-es6-%E6%A8%A1%E5%9D%97">47. 什么是 ES6 模块？</a></li>
+<li><a href="#48-%E4%BB%80%E4%B9%88%E6%98%AFset%E5%AF%B9%E8%B1%A1%E5%AE%83%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84">48. 什么是<code>Set</code>对象，它是如何工作的？</a></li>
+<li><a href="#49-%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0">49. 什么是回调函数？</a></li>
+<li><a href="#50-promise-%E6%98%AF%E4%BB%80%E4%B9%88">50. Promise 是什么？</a></li>
 </ul>
 </li>
 </ul>
