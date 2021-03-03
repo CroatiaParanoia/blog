@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://croatiaparanoia.github.io/blog/</id>
     <title>🦌</title>
-    <updated>2021-02-25T14:37:20.598Z</updated>
+    <updated>2021-03-03T08:26:19.262Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://croatiaparanoia.github.io/blog/"/>
     <link rel="self" href="https://croatiaparanoia.github.io/blog/atom.xml"/>
@@ -448,6 +448,177 @@ myFunc();
 <p><strong>回调函数</strong>是一段可执行的代码段，它作为一个参数传递给其他的代码，其作用是在需要的时候方便调用这段（回调函数）代码。</p>
 </blockquote>
 <h3 id="50-promise-是什么">50. Promise 是什么？</h3>
+<p>异步编程的一种解决方案。分三种状态， 分别为 <code>pendding</code>（等待态）、<code>fulfiled</code>（成功）、<code>rejected</code>（失败）。状态一旦改变， 就不会再变， 初始为 <code>pendding</code>。</p>
+<p>其中 ， <code>then</code> 方法接收的回调函数将会在 成功的时候触发。 <code>catch</code> 方法接收的回调函数将会在失败的时候触发。<code>finally</code> 方法接收的回调函数则是不管成功还是失败， 最后都会触发。</p>
+<p>以及此方案可以解决 传统回调不断嵌套 的问题。</p>
+<pre><code class="language-javascript">// 传统
+readFile('path', (data) =&gt; {
+  readFile('path', (data) =&gt; {
+    readFile('path', (data) =&gt; {
+      readFile('path', (data) =&gt; {
+    		// ...
+      })
+    })
+  })
+})
+
+// 改用promise
+readFile('path').then((data) =&gt; {
+  return readFile('path')
+}).then((data) =&gt; {
+  return readFile('path')
+}).then((data) =&gt; {
+  return readFile('path')
+})
+</code></pre>
+<h3 id="51-什么是-asyncawait-及其如何工作">51. 什么是 <code>async/await</code> 及其如何工作？</h3>
+<blockquote>
+<p><code>async/await</code>是 JS 中编写异步或非阻塞代码的新方法。它建立在<strong>Promises</strong>之上，让异步代码的可读性和简洁度都更高。</p>
+</blockquote>
+<p>异常情况下， 使用 try catch 捕获异常。</p>
+<pre><code class="language-javascript">try {
+  await fn();
+}catch(err){
+  // err
+}
+</code></pre>
+<h3 id="52-展开spread-运算符和-剩余rest-运算符有什么区别">52. 展开(spread )运算符和 剩余(Rest) 运算符有什么区别？</h3>
+<p>展开（将一个集合的数据进行展开，就像是一捆火柴， 解开了扎带， 把它们摊开 ）</p>
+<pre><code class="language-javascript">const arr = [1,2,3,4,5];
+
+Math.max(...arr); // =&gt; Math.max(1,2,3,4,5)
+</code></pre>
+<p>将一个对象或者数组进行拆散。</p>
+<p>剩余（将一些散开的数据进行整合成一个集合， 就像是一把摊开了的火柴， 用扎带把它们捆成捆）：</p>
+<pre><code class="language-javascript">
+const {name, age, ...otherInfo} = getUserInfo();
+
+// 此时 otherInfo 就是 除了 name , age 的其他用户信息。
+
+const fn = (...args) =&gt; {
+ 	// arg 就是fn 执行的时候， 传进来所有实参的集合， 是个数组
+}
+
+</code></pre>
+<h3 id="53-什么是默认参数">53. 什么是默认参数？</h3>
+<blockquote>
+<p>默认参数是在 JS 中定义默认变量的一种新方法，它在ES6或ECMAScript 2015版本中可用。</p>
+</blockquote>
+<pre><code class="language-javascript">// ES6：
+function fn(a = 0, b = 0){
+}
+
+// ES5:
+function fn(a, b){
+  a = a || 0;
+  b = b || 0;
+}
+
+
+// 此处要注意的是， 因为 es5 使用的是短路运算符 || 去进行取默认值的，  所以当a 为 假值时， 都会取到默认值 0， 比如为 false, undefined, null, '' 之类的。
+// 而在 es6中，  只有 a 为undefined 的时候， 才会去取默认值0， 而当a 为null， false, 的时候， 就不会去取默认值了。
+</code></pre>
+<h3 id="54-什么是包装对象wrapper-object">54. 什么是包装对象（wrapper object）？</h3>
+<p>基本数据类型是没有属性和方法的（除 <code>undefined</code> 和 <code>null</code>）， 但是在实际使用的时候， 却可以是用属性和方法。如：</p>
+<pre><code class="language-javascript">str.split();
+str.length;
+</code></pre>
+<p>而此时， 就涉及到题目的 <strong>包装对象</strong> 了。</p>
+<p>而上面的两行代码， 都可以看成是：</p>
+<pre><code class="language-javascript">(new String(str)).split();
+(new String(str)).length
+</code></pre>
+<p>当执行完毕后， 对应的实例也就会被销毁。</p>
+<p>最后可以根据上面的来尝试下这个例子，进行辅助理解下。</p>
+<pre><code class="language-javascript">const str = 'c';
+str.githubName = 'ccc';
+console.log(str.githubName); // ???
+</code></pre>
+<h3 id="55-隐式和显式转换有什么区别">55. 隐式和显式转换有什么区别？</h3>
+<blockquote>
+<p>隐式强制转换是一种将值转换为另一种类型的方法，这个过程是自动完成的，无需我们手动操作。</p>
+</blockquote>
+<p>如：</p>
+<pre><code class="language-javascript">// 将一个字符串转为数字
+string - 0;
+
+// 将一个数字转为字符串
+number + '';
+</code></pre>
+<p><strong>将运算符左右两边的不同数据类型， 先进行转换成同一数据类型， 然后再进行运算</strong></p>
+<blockquote>
+<p>而显式强制是将值转换为另一种类型的方法，我们需要手动转换。</p>
+</blockquote>
+<pre><code class="language-javascript">// 将一个字符串转为数字
+Number(string);
+
+// 将一个数字转为字符串
+String(number);
+</code></pre>
+<p><strong>开发者直接使用转换数据类型的函数来对数据进行类型的转换</strong></p>
+<h3 id="56-什么是nan以及如何检查值是否为nan">56. 什么是NaN？以及如何检查值是否为NaN？</h3>
+<p><code>NaN</code> 是<code>Not a Number</code>的首字母，表示是一个非数字的 数字类型值。</p>
+<p>因为  NaN !== NaN， 所以可以使用  <code>isNaN</code> 函数进行检测值是否为NaN。 (尽量使用 <code>Number.isNaN</code> ， 而非全局的 <code>isNaN</code>)</p>
+<h3 id="57-如何判断值是否为数组">57. 如何判断值是否为数组？</h3>
+<ol>
+<li>
+<p>使用内置的， <code>Array.isArray</code> 函数进行判断</p>
+</li>
+<li>
+<p>自己封装类型检测函数</p>
+<pre><code class="language-javascript">function typeOf(value) {
+  return Object.prototype.toString.call(value).slice(8, -1);
+}
+
+// 如果返回的是字符串 'Array', 那么就说明该传入的数据是 数组。 以及我们可以基于此函数， 再进行封装一次。
+
+function isArray(value){
+  return typeOf(value) === 'Array'
+}
+</code></pre>
+</li>
+<li>
+<p><code>arr instanceof Array</code></p>
+<p>此方式是  <code>实例 instanceof 构造函数（构造器）</code> , 可以根据实例的原型和原型链， 逐步检测 构造器 是否匹配。(重点是 <code>constractor</code> )</p>
+</li>
+</ol>
+<h3 id="58-如何在不使用模运算符的情况下检查一个数字是否是偶数">58. 如何在不使用<code>%</code>模运算符的情况下检查一个数字是否是偶数？</h3>
+<p><a href="https://juejin.cn/post/6913534577684414472#heading-57">原文链接</a></p>
+<h3 id="59-如何检查对象中是否存在某个属性">59. 如何检查对象中是否存在某个属性？</h3>
+<ol>
+<li><code>in</code> 操作符。如 <code>'a' in object</code></li>
+<li><code>hsaOwnProperty</code>。如<code>object.hasOwnProperty('a')</code></li>
+</ol>
+<h3 id="60-ajax-是什么">60. AJAX 是什么？</h3>
+<p>支持js 和 服务器进行交互的 webapi。</p>
+<p>让网页的局部更新成为了可能（传统都是需要重新刷新整个页面）</p>
+<h3 id="61-如何在-js-中创建对象">61. 如何在 JS 中创建对象？</h3>
+<ol>
+<li>字面量  <code>const obj = {name: 'c'}</code></li>
+<li>构造函数 <code>function Person (name){ this.name = name}; const obj = new Person('c')</code></li>
+<li><code>Object.create</code> ， 如 ： <code>const obj = Object.create({})</code></li>
+</ol>
+<h3 id="62-objectseal-和-objectfreeze-方法之间有什么区别">62. Object.seal 和 Object.freeze 方法之间有什么区别？</h3>
+<p><code>Object.seal</code> 方法生成密封对象， 只支持原有可写属性的继续修改。其他的新增， 删除，配置对象的属性（Object.defineProperties）特性都不被允许。</p>
+<p>而 <code>Object.freeze</code> 则是比 <code>Object.seal</code> 更加严格， 使整个对象下面的所有属性都是只读的。</p>
+<h3 id="63-in-运算符和-objecthasownproperty-方法有什么区别">63. <code>in</code> 运算符和 <code>Object.hasOwnProperty</code> 方法有什么区别？</h3>
+<p><code>hasOwnProperty</code> 是只在对象自身私有属性或方法中进行查找。</p>
+<p><code>in</code> 则是会从自身属性开始， 沿着原型链进行查找。</p>
+<h3 id="64-有哪些方法可以处理-js-中的异步代码">64. 有哪些方法可以处理 JS 中的异步代码？</h3>
+<ol>
+<li>回调函数</li>
+<li>Promise</li>
+<li>generator 函数</li>
+<li>async/await</li>
+</ol>
+<h3 id="65-函数表达式和函数声明之间有什么区别">65. 函数表达式和函数声明之间有什么区别？</h3>
+<pre><code class="language-javascript">function fn1(){};
+
+var fn2 = function(){};
+</code></pre>
+<p>在预解释上， 通过 <code>function</code> 关键字声明的，会在预解释的时候提升到作用域顶部进行预先声明+定义。</p>
+<p>而使用 <code>var</code> 关键字声明的， 在预解释阶段只是会把声明提升。后面的赋值还得等到js执行流执行到这个赋值位置才会对该处进行赋值。</p>
+<p>而上面的两种情况， 也就导致了在调用的时候， 如果是在声明之前调用， 那 <code>var</code> 关键字的就会报错。</p>
 ]]></content>
     </entry>
     <entry>
